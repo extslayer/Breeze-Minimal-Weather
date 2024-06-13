@@ -175,7 +175,7 @@ class MainActivity : AppCompatActivity() {
                 binding.lotteview.setAnimation(R.raw.sun)
             }
             "Thunderstorm" ->{
-                binding.lotteview.setAnimation(R.raw.rain)
+                binding.lotteview.setAnimation(R.raw.thunder)
             }
             "Drizzle" ->{
                 binding.lotteview.setAnimation(R.raw.rain)
