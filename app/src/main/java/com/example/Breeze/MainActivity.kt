@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        fetchWeatherData("indore")
+        fetchWeatherData("Indore")
         searchcity()
 
         
@@ -145,14 +145,16 @@ class MainActivity : AppCompatActivity() {
                     val pressure = responseBody.main.pressure.toInt().toString()
                     val condition = responseBody.weather.firstOrNull()?.main ?:"unknown"
                     val description = responseBody.weather.firstOrNull()?.description ?:"unknown"
+                    val feelslike = responseBody.main.feels_like.toString()
                     binding.temp.text = ("$temperature")
-                    binding.high.text = ("$high"+" °C")
-                    binding.low.text = ("$low"+" °C")
+                    binding.high.text = ("$high"+"°C")
+                    binding.low.text = ("$low"+"°C")
                     binding.humidity.text = ("$humidity" + " %")
                     binding.windspeed.text = ("$windspeed" + " m/s")
                     binding.pressure.text = ("$pressure"+ " mBar")
                     binding.city.text = ("$cityname"+",")
                     binding.condition.text = ("$description")
+                    binding.feels.text = ("Feels Like: "+"$feelslike"+"°C")
                     changeacctocondition(condition)
 
                 }

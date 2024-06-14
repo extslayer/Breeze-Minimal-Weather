@@ -47,6 +47,7 @@
             android:text=""
             android:textColor="#303345"
             android:textSize="35sp"
+            android:capitalize="words"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.105"
             app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +100,6 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="68dp"
             android:fontFamily="@font/inter_medium"
-            android:text=""
             android:textColor="#303345"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -320,11 +320,22 @@
             android:layout_marginTop="240dp"
             android:fontFamily="@font/inter_bold"
             android:text=" °C"
+            android:textColor="#303345"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/temp"
             app:layout_constraintTop_toBottomOf="@+id/imageView44" />
+
+        <TextView
+            android:id="@+id/feels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="68dp"
+            android:fontFamily="@font/inter_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/condition" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
