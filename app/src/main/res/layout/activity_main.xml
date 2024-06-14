@@ -45,6 +45,7 @@
             android:layout_marginTop="112dp"
             android:fontFamily="@font/inter_medium"
             android:text=""
+            android:textColor="#303345"
             android:textSize="35sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.105"
@@ -59,6 +60,7 @@
             android:layout_marginTop="12dp"
             android:fontFamily="@font/inter"
             android:text="Today"
+            android:textColor="#303345"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/city" />
@@ -69,12 +71,12 @@
             android:layout_height="208dp"
             android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.139"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/day"
-            app:lottie_loop="true"
             app:lottie_autoPlay="true"
-            app:lottie_rawRes="@raw/sun" />
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading" />
 
         <TextView
             android:id="@+id/temp"
@@ -83,9 +85,10 @@
             android:layout_marginTop="284dp"
             android:fontFamily="@font/inter_bold"
             android:text=""
+            android:textColor="#303345"
             android:textSize="50sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.295"
+            app:layout_constraintHorizontal_bias="0.196"
             app:layout_constraintStart_toEndOf="@+id/lotteview"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -97,6 +100,7 @@
             android:layout_marginEnd="68dp"
             android:fontFamily="@font/inter_medium"
             android:text=""
+            android:textColor="#303345"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/temp" />
@@ -119,6 +123,7 @@
             android:layout_marginTop="28dp"
             android:fontFamily="@font/inter"
             android:text="Pressure"
+            android:textColor="#303345"
             app:layout_constraintStart_toStartOf="@+id/imageView10"
             app:layout_constraintTop_toTopOf="@+id/imageView10" />
 
@@ -130,6 +135,7 @@
             android:layout_marginEnd="40dp"
             android:fontFamily="@font/inter"
             android:text=""
+            android:textColor="#303345"
             app:layout_constraintEnd_toEndOf="@+id/imageView10"
             app:layout_constraintTop_toTopOf="@+id/imageView10" />
 
@@ -159,6 +165,7 @@
             android:layout_marginTop="28dp"
             android:fontFamily="@font/inter"
             android:text="Wind"
+            android:textColor="#303345"
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
@@ -170,6 +177,7 @@
             android:layout_marginEnd="44dp"
             android:fontFamily="@font/inter"
             android:text=""
+            android:textColor="#303345"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
@@ -181,6 +189,7 @@
             android:layout_marginTop="28dp"
             android:fontFamily="@font/inter"
             android:text="Humidity"
+            android:textColor="#303345"
             app:layout_constraintStart_toStartOf="@+id/imageView13"
             app:layout_constraintTop_toTopOf="@+id/imageView13" />
 
@@ -192,6 +201,7 @@
             android:layout_marginEnd="48dp"
             android:fontFamily="@font/inter"
             android:text=""
+            android:textColor="#303345"
             app:layout_constraintEnd_toEndOf="@+id/imageView13"
             app:layout_constraintTop_toTopOf="@+id/imageView13" />
 
@@ -234,6 +244,7 @@
             android:layout_marginTop="12dp"
             android:fontFamily="@font/inter_semibold"
             android:text="High"
+            android:textColor="#303345"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView13" />
 
@@ -245,6 +256,7 @@
             android:layout_marginEnd="72dp"
             android:fontFamily="@font/inter_semibold"
             android:text="Low"
+            android:textColor="#303345"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView13" />
 
@@ -256,6 +268,7 @@
             android:fontFamily="@font/inter_semibold"
             android:gravity="center_horizontal|center_vertical"
             android:text=""
+            android:textColor="#303345"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView42" />
 
@@ -263,10 +276,11 @@
             android:id="@+id/low"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="75dp"
+            android:layout_marginEnd="88dp"
             android:fontFamily="@font/inter_semibold"
             android:gravity="center_horizontal|center_vertical"
             android:text=""
+            android:textColor="#303345"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView43" />
 
@@ -302,11 +316,13 @@
             android:id="@+id/textView20"
             android:layout_width="44dp"
             android:layout_height="30dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="232dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="240dp"
             android:fontFamily="@font/inter_bold"
             android:text=" °C"
             android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/temp"
             app:layout_constraintTop_toBottomOf="@+id/imageView44" />
 
