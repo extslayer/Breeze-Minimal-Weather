@@ -1,7 +1,13 @@
 package com.example.Breeze
 
+import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Geocoder
+import android.location.LocationManager
 import android.os.Bundle
+import android.os.Looper
+import android.util.Log
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -11,13 +17,20 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.Breeze.databinding.ActivityMainBinding
+import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.Priority
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.Locale
 
 //0b17eeca625632e9920e3365aaf7ab0c
 
@@ -25,8 +38,9 @@ class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var city = " "
+    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    lateinit var locationRequest: LocationRequest
+    private var cityn = " "
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,15 +51,15 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),1001)
-        }
-        else{
-           // getlocation()
-        }
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        getLastLocation()
+        Log.d("ct", "$cityn")
 
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+
+
 
         fetchWeatherData("Indore")
         searchcity()
@@ -55,7 +69,50 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    /*private fun getlocation() {
+
+    private fun getcity(lat : Double, long: Double):String{
+        var city = ""
+        var geocoder = Geocoder(this, Locale.getDefault())
+        var adress = geocoder.getFromLocation(lat,long,1)
+        city = adress!!.get(0).locality
+
+        return city
+    }
+
+    private fun getLastLocation(){
+        if (checkPermission()){
+            if (isLocationEnabled()){
+
+                fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
+                    var location = task.result
+                    if (location == null){
+                        getnewlocation()
+
+                    }else{
+
+                        cityn = getcity(location.latitude,location.longitude)
+
+                    }
+                }
+
+            }else{
+                Toast.makeText(this, "Please Enable your GPS", Toast.LENGTH_LONG).show()
+            }
+
+        }
+        else{
+            RequestPermission()
+        }
+
+    }
+
+
+    private fun getnewlocation(){
+        locationRequest = LocationRequest()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.interval = 0
+        locationRequest.fastestInterval = 0
+        locationRequest.numUpdates = 2
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -64,45 +121,55 @@ class MainActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
+
             return
         }
-        fusedLocationClient.lastLocation.addOnSuccessListener{ location : android.location.Location?->
-            if (location!=null){
-               // getcity(location.latitude,location.longitude)
+        fusedLocationProviderClient!!.requestLocationUpdates(
+            locationRequest,locationCallback,Looper.myLooper()
+        )
+    }
 
-            }
+    private val locationCallback = object :LocationCallback(){
+        override fun onLocationResult(p0: LocationResult) {
+            var lastLocation = p0.lastLocation
+            cityn = getcity(lastLocation!!.latitude,lastLocation.longitude)
         }
-    }*/
+    }
 
-   /* override fun onRequestPermissionsResult(
+
+    private fun checkPermission():Boolean{
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            return true
+        }
+        return false
+    }
+
+    private fun RequestPermission(){
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),1000)
+    }
+
+    private fun isLocationEnabled(): Boolean {
+
+        var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+
+    }
+
+    override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 1001 ){
-            if (grantResults.isNotEmpty() && grantResults[0]== PackageManager.PERMISSION_GRANTED){
-               getlocation()
+        if (requestCode == 1000){
+            if (grantResults.isNotEmpty()&&grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Log.d("Debug:", " u have permission")
             }
         }
-    }*/
+    }
 
 
-    /*private fun getcity(lat:Double, long:Double){
-        try {
-            val geoCoder = Geocoder(this, Locale.getDefault())
-            val address = geoCoder.getFromLocation(lat,long,3)
-            if (address!=null){
-                city = address[0].locality.toString()
-                Log.d("TAG", city.toString())
 
-            }
-
-        }catch (e:Exception){
-            Toast.makeText(this, "Location Loading", Toast.LENGTH_SHORT).show()
-        }
-
-    }*/
 
     private fun searchcity() {
         val searchview = binding.searchView
@@ -125,7 +192,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun fetchWeatherData(cityname:String) {
+    private fun fetchWeatherData(cityname:String="India") {
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://api.openweathermap.org/data/2.5/")
