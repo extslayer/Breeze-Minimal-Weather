@@ -145,13 +145,13 @@ class MainActivity : AppCompatActivity() {
                     val pressure = responseBody.main.pressure.toInt().toString()
                     val condition = responseBody.weather.firstOrNull()?.main ?:"unknown"
                     val description = responseBody.weather.firstOrNull()?.description ?:"unknown"
-                    binding.temp.text = ("$temperature"+" °")
-                    binding.high.text = ("H : "+"$high"+" °")
-                    binding.low.text = ("L : "+"$low"+" °")
+                    binding.temp.text = ("$temperature")
+                    binding.high.text = ("$high"+" °C")
+                    binding.low.text = ("$low"+" °C")
                     binding.humidity.text = ("$humidity" + " %")
                     binding.windspeed.text = ("$windspeed" + " m/s")
                     binding.pressure.text = ("$pressure"+ " mBar")
-                    binding.city.text = ("$cityname")
+                    binding.city.text = ("$cityname"+",")
                     binding.condition.text = ("$description")
                     changeacctocondition(condition)
 
