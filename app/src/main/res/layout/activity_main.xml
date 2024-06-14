@@ -264,7 +264,7 @@
             android:id="@+id/high"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="63dp"
+            android:layout_marginStart="52dp"
             android:fontFamily="@font/inter_semibold"
             android:gravity="center_horizontal|center_vertical"
             android:text=""
@@ -276,7 +276,7 @@
             android:id="@+id/low"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="88dp"
+            android:layout_marginEnd="60dp"
             android:fontFamily="@font/inter_semibold"
             android:gravity="center_horizontal|center_vertical"
             android:text=""
@@ -335,7 +335,8 @@
             android:layout_marginEnd="68dp"
             android:fontFamily="@font/inter_medium"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/condition" />
+            app:layout_constraintTop_toBottomOf="@+id/condition"
+            android:textColor="#303345"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
