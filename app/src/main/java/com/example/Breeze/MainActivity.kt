@@ -182,9 +182,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText != null) {
-                    fetchWeatherData(newText)
-                }
+                
                 return true
             }
 
